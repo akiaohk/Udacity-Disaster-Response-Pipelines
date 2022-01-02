@@ -1,7 +1,8 @@
 # Project 2 : Disaster ResponsePipelines (Udacity)
 ![](Screenshots/webapp.png)
 ## 1. Description
-This project goal is to create a machine learning pipeline to classify disaster events from a dataset provided by Figure Eight containing real messages.
+This project goal is to create a machine learning pipeline to classify disaster events from a dataset provided by [Figure Eight](https://appen.com/) containing real messages.
+
 This project will include a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data.
 ## 2. Project Components
 There are three components of this project:
@@ -54,12 +55,14 @@ File *models/train_classifier.py* contains machine learning pipeline that:
 ## 5. Screenshots
 **Sample run of process_data.py**
 
-![](Screenshots/sample_data_cleaning.png)
+![](Screenshots/sample_data _cleaning.png)
 
 **Sample run of train_classifier.py**
 
 ![](Screenshots/sample_train_classifier1.png)
 ![](Screenshots/sample_train_classifier2.png)
+
+**Sample run of run.py**
 
 ![](Screenshots/starting_the_webapp.png)
 
@@ -93,6 +96,8 @@ File *models/train_classifier.py* contains machine learning pipeline that:
 **models/classifier.pkl** : saved model
 
 **models/train_classifier.py** : ML Pipeline
+
+**Screenshots**
 
 **README.md**
 
