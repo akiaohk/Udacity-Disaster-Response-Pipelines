@@ -12,26 +12,7 @@ def load_data(messages_filepath, categories_filepath):
     df = messages.merge(categories, on = ['id'])
     return df
 
-def clean_data(df):
-    # split the values in the categories column on the ';'
-    #categories = df['categories'].str.split(';', expand = True)
-    # use the first row of categories dataframe to create column names for the categories data
-    #row = categories.iloc[0]
-    #category_colnames = row.transform(lambda x: x[:-2]).tolist()
-    #categories.columns = category_colnames
-    
-    # convert category values to just numbers 0 or 1.
-    #for column in categories:
-        # set each value to be the last character of the string
-        #categories[column] = categories[column].transform(lambda x: x[-1:])
-    
-        # convert column from string to numeric
-        #categories[column] = pd.to_numeric(categories[column])
-    
-    # replace categories column in df with the new category columns
-    #df.drop('categories', axis = 1, inplace = True)
-    
-    
+def clean_data(df): 
     # split the values in the categories column on the ';'
     categories = df.categories.str.split(';', expand=True)
 
