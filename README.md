@@ -53,6 +53,7 @@ File *models/train_classifier.py* contains machine learning pipeline that:
 
 
 ## 5. Screenshots
+
 **Sample run of train_classifier.py**
 
 ![](Screenshots/sample_train_classifier1.png)
