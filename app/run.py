@@ -1,4 +1,4 @@
-
+# import libraries
 from collections import Counter
 import json, plotly
 import pandas as pd
@@ -22,12 +22,14 @@ app = Flask(__name__)
 def tokenize(text):
     """
     Tokenizes text data
-    Args:
+    
+    Arguments:
     text str: Messages as text data
-    Returns:
+    Outputs:
     # clean_tokens list: Processed text after normalizing, tokenizing and lemmatizing
     words list: Processed text after normalizing, tokenizing and lemmatizing
     """
+    
     # Normalize text
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     
