@@ -1,9 +1,27 @@
+"""
+Project: Disaster Response Pipeline
+
+Script Syntax for execution:
+> python process_data.py <path to messages csv file> <path to categories csv file> <path to sqllite  destination db>
+> python process_data.py disaster_messages.csv disaster_categories.csv DisasterResponse.db
+"""
+
+# Import libraries
 import sys
 import pandas as pd
 import sqlite3
 from sqlalchemy import create_engine
 
-def load_data(messages_filepath, categories_filepath):
+def load_data(messages_filepath, categories_filepath):    
+    """
+    Load messages and categories datasets and merge using common id function.
+    Arguments:
+        messages_filepath -> csv path of file containing messages
+        categories_filepath -> csv path of file containing categories
+    Output:
+        df -> combined dataset of messages and categories
+    """
+    
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     # load categories dataset
@@ -13,6 +31,15 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df): 
+    """
+    Clean Categories Data Function
+    
+    Arguments:
+        df -> combined data containing messages and categories
+    Outputs:
+        df -> combined data containing messages and categories with categories cleaned up
+    """
+    
     # split the values in the categories column on the ';'
     categories = df.categories.str.split(';', expand=True)
 
@@ -41,6 +68,13 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    Save the clean dataset into an sqlite database function.
+    Arguments:
+        df -> combined dataset of messages and categories cleaned
+        database_filename -> path to SQLite database
+    """ 
+    
     # save the clean dataset into an sqlite database
     engine = create_engine('sqlite:///' + database_filename)
     conn = sqlite3.connect('data/DisasterResponse.db')
@@ -50,6 +84,13 @@ def save_data(df, database_filename):
 
 
 def main():
+    """
+    Main function which will kick off the data processing functions. There are three primary actions taken by this function:
+        1) Load Messages Data with Categories
+        2) Clean Categories Data
+        3) Save Data to SQLite Database
+    """
+    
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
