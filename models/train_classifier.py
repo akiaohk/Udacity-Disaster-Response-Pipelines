@@ -1,3 +1,12 @@
+"""
+Project: Disaster Response Pipeline
+
+Script Syntax for execution:
+> python train_classifier.py <path to sqllite  destination db> <path to the pickle file>
+> python train_classifier.py ../data/DisasterResponse.db classifier.pkl
+"""
+
+# Import libraries
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
@@ -24,13 +33,16 @@ warnings.filterwarnings('ignore')
 def load_data(database_filepath):
     """
     Loads data from SQL Database
-    Args:
+    
+    Arguments:
     database_filepath: SQL database file
-    Returns:
+    
+    Outputs:
     X pandas_dataframe: Features dataframe
     Y pandas_dataframe: Target dataframe
     category_names list: Target labels 
     """
+    
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     table_name = database_filepath.replace(".db","") + "_table"
     df = pd.read_sql_table(table_name, con = engine)
@@ -46,9 +58,11 @@ def load_data(database_filepath):
 def tokenize(text):
     """
     Tokenizes text data
-    Args:
+    
+    Arguments:
     text str: Messages as text data
-    Returns:
+    
+    Outputs:
     words list: Processed text after normalizing, tokenizing and lemmatizing
     """
     # Normalize text
@@ -71,9 +85,10 @@ def build_model():
     """
     Build model with GridSearchCV
     
-    Returns:
+    Outputs:
     Trained model after performing grid search
     """
+    
     # model pipeline
     pipeline = Pipeline([('vect', CountVectorizer(tokenizer=tokenize)),
                          ('tfidf', TfidfTransformer()),
@@ -95,6 +110,16 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    Evaluate model function.
+    
+    Arguments:
+        model -> sklearn model
+        X_test -> Features for the test set
+        Y_test -> Labels for the test set
+        category_names -> list of category names
+    """
+
     Y_prediction_test = model.predict(X_test)
 
     # Classification report
@@ -102,10 +127,28 @@ def evaluate_model(model, X_test, Y_test, category_names):
     print(classification_report(Y_test, Y_prediction_test, target_names=category_names))
 
 def save_model(model, model_filepath):
+    """
+    Saves the model to a Python pickle file 
+    
+    Arguments:
+    model: Trained model
+    model_filepath: Filepath to save the model
+    """
+    
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
+    """
+    Train Classifier Main function
+    
+    This function applies the Machine Learning Pipeline:
+        1) Extract data from SQLite db
+        2) Train ML model on training set
+        3) Estimate model performance on test set
+        4) Save trained model as Pickle    
+    """
+    
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
