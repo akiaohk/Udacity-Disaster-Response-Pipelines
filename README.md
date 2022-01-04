@@ -44,8 +44,12 @@ File *models/train_classifier.py* contains machine learning pipeline that:
 ## 4. Executing Program
 - Run the following commands in the project's directory to set up the database, train model and save the model.
 
-  - To run ETL pipeline to clean data and store the processed data in the database python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/disaster_response_db.db
-  - To run the ML pipeline that loads data from DB, trains classifier and saves the classifier as a pickle file python models/train_classifier.py data/disaster_response_db.db models/classifier.pkl
+  - To run ETL pipeline to clean data and store the processed data in the database 
+  
+     python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+  - To run the ML pipeline that loads data from DB, trains classifier and saves the classifier as a pickle file 
+  
+     python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 
 - Run the following command in the app's directory to run your web app. python run.py
 
